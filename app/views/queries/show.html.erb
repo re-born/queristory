@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Query:</strong>
+  <%= @query.query %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @query.user_id %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @query.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_query_path(@query) %> |
+<%= link_to 'Back', queries_path %>
