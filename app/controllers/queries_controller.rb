@@ -24,7 +24,7 @@ class QueriesController < ApplicationController
   # POST /queries
   # POST /queries.json
   def create
-    @query = Query.new(query_params)
+    @query = Query.new({query: params['?q']})
 
     respond_to do |format|
       if @query.save
