@@ -28,6 +28,7 @@ class QueriesController < ApplicationController
     # respond_to do |format|
       if @query.save
         render nothing: true
+        tweet(params['?q'])
         # format.json { render action: 'show', status: :created, location: @query }
       else
         # format.json { render json: @query.errors, status: :unprocessable_entity }
@@ -66,5 +67,21 @@ class QueriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def query_params
       params.require(:query).permit(:query, :user_id, :deleted_at)
+    end
+
+    def tweet(tweet_content)
+      require 'twitter'
+      client = Twitter::REST::Client.new do |config|
+        config.consumer_key       = ENV['consumer_key']
+        config.consumer_secret    = ENV['consumer_secret']
+        config.access_token        = ENV['oauth_token']
+        config.access_token_secret = ENV['oauth_token_secret']
+      end
+      tweet_content = (tweet_content.length > 140) ? tweet_content[0..139].to_s : tweet_content
+      begin
+        client.update(tweet_content)
+      rescue Exception => e
+        p e
+      end
     end
 end
