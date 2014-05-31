@@ -26,6 +26,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     hostname_condition = parsed_url.hostname == 'www.google.co.jp'
                       || parsed_url.hostname == 'www.google.com'
     pathname_condition = parsed_url.pathname == '/search'
+                      || parsed_url.pathname == '/webhp'
 
 
     if (hostname_condition && pathname_condition){
