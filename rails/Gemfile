@@ -9,6 +9,8 @@ gem 'rails', '4.0.4'
 gem 'sqlite3'
 gem 'uglifier', '>= 1.3.0'
 gem 'twitter'
+gem 'awesome_print'
+gem 'grape'
 
 group :development do
   gem 'better_errors'
