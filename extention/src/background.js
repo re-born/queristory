@@ -31,10 +31,10 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
     if (hostname_condition && pathname_condition){
       if (parsed_url.hash == '') {
-        post_query(parsed_url.search)
+        post_query(parsed_url.search.slice(1))
       } else {
         console.log('hash: '+parsed_url.hash)
-        post_query('?'+parsed_url.hash.slice(1))
+        post_query(parsed_url.hash.slice(1))
       }
     }
   }
