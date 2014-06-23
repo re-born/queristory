@@ -9,6 +9,7 @@ function parseUrl( url ) {
 function post_query(query) {
   console.log('query:' + query)
   console.log('last_query:' + query)
+  query = query + '&session_id=' + guid()
   if(query != last_query){
     $.ajax({
       url: 'http://0.0.0.0:1984/query/create',
@@ -19,6 +20,18 @@ function post_query(query) {
   }
   last_query = query
 }
+
+var guid = (function() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+  }
+  return function() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+  };
+})();
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (changeInfo.status == 'complete') {

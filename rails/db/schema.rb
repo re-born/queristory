@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621081949) do
+ActiveRecord::Schema.define(version: 20140623080911) do
 
   create_table "queries", force: true do |t|
     t.text     "q"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140621081949) do
     t.integer  "num"
     t.integer  "filter"
     t.integer  "pws"
+    t.string   "session_id"
   end
 
 end
