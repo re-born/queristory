@@ -24,11 +24,11 @@ class QueriesController < ApplicationController
   # POST /queries
   # POST /queries.json
   def create
-    @query = Query.new({query: params['?q']})
+    @query = Query.new(query_params)
     # respond_to do |format|
       if @query.save
         render nothing: true
-        tweet(params['?q'])
+        tweet(params['q'])
         # format.json { render action: 'show', status: :created, location: @query }
       else
         # format.json { render json: @query.errors, status: :unprocessable_entity }
@@ -66,7 +66,7 @@ class QueriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def query_params
-      params.require(:query).permit(:query, :user_id, :deleted_at)
+      params.permit(:q, :oq, :tbm, :as_qdr, :lr, :tbs, :source, :safe, :num, :filter, :pws, :session_id)
     end
 
     def tweet(tweet_content)

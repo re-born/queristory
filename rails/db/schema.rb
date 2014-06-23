@@ -11,14 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428163620) do
+ActiveRecord::Schema.define(version: 20140623080911) do
 
   create_table "queries", force: true do |t|
-    t.text     "query"
-    t.integer  "user_id"
+    t.text     "q"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "oq"
+    t.string   "tbm"
+    t.string   "as_qdr"
+    t.string   "lr"
+    t.string   "tbs"
+    t.string   "source"
+    t.string   "safe"
+    t.integer  "num"
+    t.integer  "filter"
+    t.integer  "pws"
+    t.string   "session_id"
   end
 
 end
