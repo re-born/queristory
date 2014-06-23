@@ -1,4 +1,5 @@
-last_query = ''
+var last_query = ''
+var latest_session_date = new Date()
 
 function parseUrl( url ) {
     var a = document.createElement('a');
@@ -9,7 +10,13 @@ function parseUrl( url ) {
 function post_query(query) {
   console.log('query:' + query)
   console.log('last_query:' + query)
-  query = query + '&session_id=' + guid()
+  console.log('new Date():' + new Date())
+  console.log('latest_session_date:' + latest_session_date)
+  console.log('diff:' + (new Date() - latest_session_date))
+  if (new Date() - latest_session_date > 30000000) {
+    session_id = generate_session_id()
+  }
+  query = query + '&session_id=' + session_id
   if(query != last_query){
     $.ajax({
       url: 'http://0.0.0.0:1984/query/create',
@@ -19,19 +26,22 @@ function post_query(query) {
     console.log('posted:' + query)
   }
   last_query = query
+  latest_session_date = new Date()
 }
 
-var guid = (function() {
-  function s4() {
+var generate_session_id = (function() {
+  function random_id() {
     return Math.floor((1 + Math.random()) * 0x10000)
                .toString(16)
                .substring(1);
   }
   return function() {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-           s4() + '-' + s4() + s4() + s4();
+    return random_id() + random_id() + '-' + random_id() + '-' + random_id() + '-' +
+           random_id() + '-' + random_id() + random_id() + random_id();
   };
 })();
+
+var session_id = generate_session_id()
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (changeInfo.status == 'complete') {
