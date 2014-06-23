@@ -1,3 +1,4 @@
+const SESSION_INTERVAL = 1800000
 var last_query = ''
 var latest_session_date = new Date()
 
@@ -13,7 +14,7 @@ function post_query(query) {
   console.log('new Date():' + new Date())
   console.log('latest_session_date:' + latest_session_date)
   console.log('diff:' + (new Date() - latest_session_date))
-  if (new Date() - latest_session_date > 30000000) {
+  if (new Date() - latest_session_date > SESSION_INTERVAL) {
     session_id = generate_session_id()
   }
   query = query + '&session_id=' + session_id
