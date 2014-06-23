@@ -21,7 +21,7 @@ function post_query(query) {
     $.ajax({
       url: 'http://0.0.0.0:1984/query/create',
       type: 'post',
-      data: query, // => {'?q': 'hoge', ...}
+      data: query, // => 'q=hoge&safe=off&...&session_id=30e108d2...'
     })
     console.log('posted:' + query)
   }
