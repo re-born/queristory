@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623080911) do
+ActiveRecord::Schema.define(version: 20140625132837) do
+
+  create_table "pages", force: true do |t|
+    t.integer  "query_id"
+    t.string   "q"
+    t.string   "session_id"
+    t.string   "url"
+    t.integer  "rank"
+    t.integer  "start"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "queries", force: true do |t|
     t.text     "q"
