@@ -3,20 +3,26 @@ var last_query = ''
 var latest_session_date = new Date()
 var session_id = generate_session_id()
 
-function post_query(query) {
-  if (new Date() - latest_session_date > SESSION_INTERVAL) {
-    session_id = generate_session_id()
-  }
-  query = query + '&session_id=' + session_id
+function post_query(query, session_id) {
   if(query != last_query){
     $.ajax({
       url: 'http://0.0.0.0:1984/query/create',
       type: 'post',
-      data: query, // => 'q=hoge&safe=off&...&session_id=30e108d2...'
+      data: {
+        query: query,
+        session_id: session_id,
+      }
     })
   }
   last_query = query
+}
+
+function check_session_id() {
+  if (new Date() - latest_session_date > SESSION_INTERVAL) {
+    session_id = generate_session_id()
+  }
   latest_session_date = new Date()
+  return session_id
 }
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
@@ -29,9 +35,9 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
     if (hostname_condition && pathname_condition){
       if (parsed_url.hash == '') {
-        post_query(parsed_url.search.slice(1))
+        post_query(parsed_url.search.slice(1), check_session_id())
       } else {
-        post_query(parsed_url.hash.slice(1))
+        post_query(parsed_url.hash.slice(1), check_session_id())
       }
     }
   }

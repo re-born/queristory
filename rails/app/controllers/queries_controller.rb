@@ -1,9 +1,11 @@
 class QueriesController < ApplicationController
   def create
-    @query = Query.new(query_params)
+    query_info = Rack::Utils.parse_nested_query(query_params['query'])
+    query_info['session_id'] = query_params['session_id']
+    @query = Query.new(query_info)
       if @query.save
         render nothing: true
-        tweet(params['q'])
+        tweet(@query.q)
       else
       end
   end
@@ -11,7 +13,7 @@ class QueriesController < ApplicationController
   private
 
     def query_params
-      params.permit(:q, :oq, :tbm, :as_qdr, :lr, :tbs, :source, :safe, :num, :filter, :pws, :session_id)
+      params.permit(:query, :session_id)
     end
 
     def tweet(tweet_content)
