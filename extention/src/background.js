@@ -4,14 +4,12 @@ var latest_session_date = new Date()
 var session_id = generate_session_id()
 
 function post_query(query, session_id) {
+  query = query + '&session_id=' + session_id
   if(query != last_query){
     $.ajax({
       url: 'http://0.0.0.0:1984/query/create',
       type: 'post',
-      data: {
-        query: query,
-        session_id: session_id,
-      }
+      data: query, // => 'q=hoge&safe=off&...&session_id=30e108d2...'
     })
   }
   last_query = query
