@@ -8,6 +8,7 @@ function add_binding_to_page() {
   $.each($('.g h3 a[onmousedown]'), function(i, dom) {
     $(this).click(function () {
       var clicked_url = this.attributes['data-href'].value
+      var clicked_title = this.text
       var parsed_url = document.createElement('a')
       parsed_url.href = location.href
       if (parsed_url.hash == '') {
@@ -15,7 +16,10 @@ function add_binding_to_page() {
       } else {
         var query = parsed_url.hash.slice(1)
       }
-      var page_data = query + '&url=' + clicked_url + '&rank=' + i
+      var page_data = query
+                    + '&url=' + clicked_url
+                    + '&title=' + clicked_title
+                    + '&rank=' + i
       if(clicked_url != latest_url){
         $.ajax({
           url: 'http://0.0.0.0:1984/page/create',

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625132837) do
+ActiveRecord::Schema.define(version: 20140630073513) do
 
   create_table "pages", force: true do |t|
     t.integer  "query_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140625132837) do
     t.integer  "start"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   create_table "queries", force: true do |t|

@@ -10,6 +10,6 @@ class PagesController < ApplicationController
 
   private
     def page_params
-      params.permit(:url, :q, :rank, :start, :session_id)
+      params.permit(:url, :title, :q, :rank, :start, :session_id)
     end
 end
