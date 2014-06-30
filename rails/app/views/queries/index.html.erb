@@ -1,10 +1,27 @@
-<h1>Listing queries</h1>
-<% @queries.each do |query| %>
-<hr>
-  <h2><%= query.q %></h2>
-  <h4><%= query.created_at %></h4>
-  <% query.pages.each do |page| %>
-    <%= "#{page.title}: " %> <%= link_to page.url, page.url %> <br>
+<div class='contents'>
+  <h1>Queristory</h1>
+  <% @queries.each do |query| %>
+    <div class='row query' id='item_<%= query.id %>'>
+      <div class='columns column_date'>
+        <p class='date'> <%= query.created_at.strftime('%Y/%m/%d') %> </p>
+        <p class='time'> <%= query.created_at.strftime('%H:%M') %> </p>
+      </div>
+      <div class='columns column_left'>
+        <p class='user_icon'><%= image_tag 'http://pbs.twimg.com/profile_images/467928148558876672/XftJPwwm.png' %></p>
+      </div>
+      <div class='columns column_right'>
+        <h3 class='title'><span class='truncate'><%= link_to query.q.truncate(80), "http://google.com/search?q=#{query.q}" , title: query.q %></span></h3>
+        <div class='content'>
+          <% query.pages.each do |page| %>
+          <span class='sec_after'>
+            <%= "#{(page.created_at - query.created_at).round(3)} sec"
+          %>
+          </span>
+            <%= link_to page.title, page.url %> <br>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
-<% end %>
 <%= paginate @queries %>
+</div>
