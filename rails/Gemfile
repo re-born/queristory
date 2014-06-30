@@ -4,7 +4,7 @@ gem 'spring'
 gem 'jazz_hands'
 gem 'railroady'
 
-gem 'rails', '4.0.4'
+gem 'rails', '4.1.1'
 
 gem 'sqlite3'
 gem 'uglifier', '>= 2.5.0'
