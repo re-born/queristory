@@ -1,4 +1,8 @@
 class QueriesController < ApplicationController
+  def index
+    @queries = Query.last(30).uniq{|query| query.q}.reverse
+  end
+
   def create
     @query = Query.new(query_params)
       if @query.save

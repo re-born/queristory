@@ -1,5 +1,5 @@
 ShameHistory::Application.routes.draw do
-  #resources :queries
+  resources :queries
   post 'query/create' => 'queries#create'
   post 'page/create' => 'pages#create'
 
