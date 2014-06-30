@@ -1,7 +1,3 @@
-chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-
-})
-
 var latest_url = ''
 
 function add_binding_to_page() {
@@ -16,18 +12,22 @@ function add_binding_to_page() {
       } else {
         var query = parsed_url.hash.slice(1)
       }
-      var page_data = query
-                    + '&url=' + clicked_url
-                    + '&title=' + clicked_title
-                    + '&rank=' + i
-      if(clicked_url != latest_url){
-        $.ajax({
-          url: 'http://0.0.0.0:1984/page/create',
-          type: 'post',
-          data: page_data,
-        })
-        latest_url = clicked_url
-      }
+      chrome.extension.sendRequest({greeting: 'get_session_id'}, function(response) {
+        var session_id = response.session_id
+        var page_data = query
+                      + '&url=' + clicked_url
+                      + '&title=' + clicked_title
+                      + '&rank=' + i
+                      + '&session_id=' + session_id
+        if(clicked_url != latest_url){
+          $.ajax({
+            url: 'http://0.0.0.0:1984/page/create',
+            type: 'post',
+            data: page_data,
+          })
+          latest_url = clicked_url
+        }
+      })
     })
   })
 }

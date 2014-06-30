@@ -3,10 +3,7 @@
 <hr>
   <h2><%= query.q %></h2>
   <h4><%= query.created_at %></h4>
-  <% Page.where({q: query.q}).each do |page| %>
-    <%= "#{page.title}: " %> <%= link_to page.url %> <br>
+  <% query.pages.each do |page| %>
+    <%= "#{page.title}: " %> <%= link_to page.url, page.url %> <br>
   <% end %>
 <% end %>
-<br>
-
-<%= link_to 'New Query', new_query_path %>

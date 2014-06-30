@@ -40,3 +40,12 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     }
   }
 })
+
+chrome.extension.onRequest.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == 'get_session_id')
+      sendResponse({session_id: session_id})
+    else
+      sendResponse({}) // snub them.
+  }
+)
