@@ -1,6 +1,8 @@
 class QueriesController < ApplicationController
   def index
-    @queries = Query.last(30).uniq{|query| query.q}.reverse
+    @queries = Kaminari.paginate_array(
+      Query.uniq{|query| query.q}.reverse
+    ).page(params[:page]).per(10)
   end
 
   def create
