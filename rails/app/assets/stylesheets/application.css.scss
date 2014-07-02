@@ -72,7 +72,6 @@ body {
     .row {
       width: 100%;
       clear: both;
-      height: 190px;
       .column_date {
         width: 16%;
         float: left;
@@ -83,7 +82,7 @@ body {
           line-height: 17px;
         }
         .time {
-          font-size: 35px;
+          font-size: 30px;
           color: #888888;
           border-top: 1px solid #E73306;
           margin-right: -43px;
@@ -93,16 +92,6 @@ body {
         float: left;
         width: 7%;
         position: relative;
-        height: 155px;
-        &:after {
-          content: '';
-          position: absolute;
-          left: 15px;
-          top: 33px;
-          border-left: 1px solid $user_color;
-          height: 101%;
-          z-index: -1;
-        }
         .user_icon {
           margin: -4px;
           img {
@@ -117,7 +106,6 @@ body {
         float: left;
         width: 77%;
         margin-top: 3px;
-        height: 190px;
         position: relative;
         h3.title {
           font-size: 20px;
@@ -132,14 +120,15 @@ body {
         }
         .content {
           width: 100%;
-          margin: 16px 5px;
+          margin: 10px 5px 4px -38px;
           font-weight: 100;
           font-size: 14px;
           float: left;
           line-height: 20px;
           word-break: break-all;
-          height: 135px;
           overflow-y: scroll;
+          border-left: 1px solid #8A8A8A;
+          padding: 9px 26px 20px 42px;
           .sec_after {
             color: #E0E0E0;
             background: #363636;
