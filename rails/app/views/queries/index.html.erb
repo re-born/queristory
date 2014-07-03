@@ -11,14 +11,23 @@
       </div>
       <div class='columns column_right'>
         <h3 class='title'><span class='truncate'><%= link_to query.q.truncate(80), "http://google.com/search?q=#{query.q}" , title: query.q %></span></h3>
-        <div class='content'>
-          <% query.pages.each do |page| %>
-          <span class='sec_after'>
-            <%= "#{(page.created_at - query.created_at).round(3)} sec"
-          %>
-          </span>
-            <%= link_to page.title, page.url %> <br>
+        <div class='options'>
+          <% ['tbm', 'as_qdr', 'lr', 'tbs', 'source'].each do |option| %>
+            <% if query[option].present? %>
+              <span class='label <%= option %>'>
+                <%= "#{option}: #{query[option]}" %>
+              </span>
+            <% end %>
           <% end %>
+          <div class='content'>
+            <% query.pages.each do |page| %>
+            <span class='sec_after'>
+              <%= "#{(page.created_at - query.created_at).round(3)} sec"
+            %>
+            </span>
+              <%= link_to page.title, page.url %> <br>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
