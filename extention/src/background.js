@@ -1,4 +1,4 @@
-const SESSION_INTERVAL = 1800000
+const SESSION_INTERVAL = 600000
 var last_query = ''
 var latest_session_date = new Date()
 var session_id = generate_session_id()
