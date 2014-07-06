@@ -10,7 +10,9 @@
         <p class='user_icon'><%= image_tag 'queristory.png' %></p>
       </div>
       <div class='columns column_right'>
-        <h3 class='title'><span class='truncate'><%= link_to query.q.truncate(80), "http://google.com/search?q=#{query.q}" , title: query.q %></span></h3>
+        <h3 class='title'><span class='truncate'>
+          <%= link_to query.q.truncate(80), "http://google.com/search?q=#{query.q}" , title: query.q %>
+        </span></h3>
         <div class='options'>
           <% ['tbm', 'as_qdr', 'lr', 'tbs', 'source'].each do |option| %>
             <% if query[option].present? %>
@@ -19,17 +21,17 @@
               </span>
             <% end %>
           <% end %>
-          <div class='content'>
-            <% query.pages.each do |page| %>
-            <span class='page_info sec_after'>
-              <%= "#{(page.created_at - query.created_at).round(1)} sec" %>
-            </span>
-            <span class='page_info rank'>
-              <%= "rank: #{(page.start.to_i + page.rank)}" %>
-            </span>
-              <%= link_to page.title, page.url %> <br>
-            <% end %>
-          </div>
+        </div>
+        <div class='content'>
+          <% query.pages.each do |page| %>
+          <span class='page_info sec_after'>
+            <%= "#{(page.created_at - query.created_at).round(1)} sec" %>
+          </span>
+          <span class='page_info rank'>
+            <%= "rank: #{(page.start.to_i + page.rank)}" %>
+          </span>
+          <%= link_to page.title, page.url %> <br>
+          <% end %>
         </div>
       </div>
     </div>
