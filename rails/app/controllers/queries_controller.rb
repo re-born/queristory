@@ -1,6 +1,6 @@
 class QueriesController < ApplicationController
   def index
-    @queries = Query.all.joins(:pages).page(params[:page]).per(25)
+    @queries = Query.all.page(params[:page]).per(25)
   end
 
   def create

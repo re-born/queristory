@@ -14,7 +14,6 @@ gem 'grape'
 gem 'kaminari'
 gem 'sass-rails'
 gem 'compass-rails'
-gem 'rack-mini-profiler'
 
 group :development do
   gem 'better_errors'
