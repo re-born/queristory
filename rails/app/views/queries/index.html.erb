@@ -21,10 +21,10 @@
           <% end %>
           <div class='content'>
             <% query.pages.each do |page| %>
-            <span class='page_info'>
+            <span class='page_info sec_after'>
               <%= "#{(page.created_at - query.created_at).round(1)} sec" %>
             </span>
-            <span class='page_info'>
+            <span class='page_info rank'>
               <%= "rank: #{(page.start.to_i + page.rank)}" %>
             </span>
               <%= link_to page.title, page.url %> <br>
