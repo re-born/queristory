@@ -16,7 +16,7 @@ function add_binding_to_page() {
         var session_id = response.session_id
         var page_data = query
                       + '&url=' + clicked_url
-                      + '&title=' + clicked_title
+                      + '&title=' + encodeURIComponent(clicked_title)
                       + '&rank=' + i
                       + '&session_id=' + session_id
         if(clicked_url != latest_url){
