@@ -70,6 +70,8 @@ GEM
     execjs (2.2.1)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    font-awesome-rails (4.1.0.0)
+      railties (>= 3.2, < 5.0)
     fssm (0.2.10)
     grape (0.7.0)
       activesupport
@@ -230,6 +232,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   compass-rails
+  font-awesome-rails
   grape
   jazz_hands
   kaminari

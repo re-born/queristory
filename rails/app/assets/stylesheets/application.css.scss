@@ -1,5 +1,6 @@
 /*
  *= require_self
+ *= require font-awesome
  *= require_tree .
  */
 
@@ -28,7 +29,7 @@ $headings: h1, h2, h3, h4, h5, h6;
 $size: 1.8em, 1.6em, 1.4em, 1.3em, 1.2em, 1.1em;
 $head-size: zip($headings, $size);
 
-*, a, .date, h3, .label {
+*, a, .date, h3 {
   font-family: 'mplus-1c-light';
 }
 h1, .time {
@@ -53,7 +54,7 @@ h1 {
 }
 
 .user_icon img {
-  border-radius: 50%;
+  border-radius: 50% 0;
   vertical-align: middle;
 }
 
@@ -112,6 +113,8 @@ body {
           white-space: nowrap;
           overflow: hidden;
           float: left;
+          line-height: 30px;
+          margin: -5px 0;
           a {
             font-size: 20px;
             text-align: center;
@@ -121,19 +124,38 @@ body {
         }
         .options {
           white-space: nowrap;
+          a:hover { text-decoration: none; }
           .label {
             display: inline-block;
-            background: #333;
+            background: transparent;
             color: #fff;
             border-radius: 5px;
             padding: 4px 6px;
-            margin: 2px -3px -2px 11px;
+            margin: 0px -3px -2px 11px;
             font-size: 12px;
-            &.tbm { background: #1abc9c; }
-            &.as_qdr { background: #f1c40f; }
-            &.lr { background: #e67e22; }
-            &.tbs { background: #e74c3c; }
-            &.source { background: #9b59b6; }
+            font-weight: 100;
+            font-family: 'Helvetica', Helvetica, Arial, sans-serif;
+            @include little_transition;
+            &.tbm {
+              border:1px solid #1abc9c; color: #1abc9c;
+              &:hover { background:#1abc9c; color: #fff; }
+            }
+            &.as_qdr {
+              border:1px solid #DA0; color: #DA0;
+              &:hover { background:#F1BA00; color: #fff; }
+            }
+            &.lr {
+              border:1px solid #e67e22; color: #e67e22;
+              &:hover { background:#e67e22; color: #fff; }
+            }
+            &.tbs {
+              border:1px solid #e74c3c; color: #e74c3c;
+              &:hover { background:#e74c3c; color: #fff; }
+            }
+            &.source {
+              border:1px solid #9b59b6; color: #9b59b6;
+              &:hover { background:#9b59b6; color: #fff; }
+            }
           }
         }
         .content {
@@ -148,22 +170,32 @@ body {
           padding: 18px 26px 26px 42px;
           a {
             vertical-align: middle;
+            font-weight: 100;
+            font-family: 'Helvetica', Helvetica, Arial, sans-serif;
           }
           .page_info {
-            color: #333;
-            border: #555 1px solid;
+            color: #666;
+            border: #666 1px solid;
             border-radius: 8px;
             padding: 2px 2px 2px 6px;
             line-height: 37px;
             margin-right: 5px;
             font-size: 12px;
+            i {
+              font-size: 16px;
+              vertical-align: middle;
+              border-right: 1px dotted #666;
+              padding: 1px 3px 0 0;
+            }
             &.sec_after{
               &:before {
                 content: '';
                 position: absolute;
-                margin: 18px -50px;
-                border-top: 1px solid #727272;
+                margin: -22px -50px;
+                border-bottom: 1px solid #666;
                 width: 43px;
+                border-radius: 0px 0px 0px 57%;
+                height: 40px;
               }
             }
             &.rank{
@@ -171,7 +203,7 @@ body {
                 content: '';
                 position: absolute;
                 margin: 18px -12px;
-                border-top: 1px solid #727272;
+                border-top: 1px solid #666;
                 width: 5px;
               }
             }
@@ -182,5 +214,9 @@ body {
   }
   .truncate {
     word-break: break-all;
+  }
+  .pagination {
+    float: right;
+    margin-bottom: 20px;
   }
 }

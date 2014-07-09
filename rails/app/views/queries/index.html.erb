@@ -16,19 +16,23 @@
         <div class='options'>
           <% ['tbm', 'as_qdr', 'lr', 'tbs', 'source'].each do |option| %>
             <% if query[option].present? %>
-              <span class='label <%= option %>'>
-                <%= "#{option}: #{query[option]}" %>
-              </span>
+              <%= link_to "http://google.com/search?q=#{query.q}&#{option}=#{query[option]}" do %>
+                <span class='label <%= option %>'>
+                  <%= "#{option}: #{query[option]}".truncate(25) %>
+                </span>
+            <% end %>
             <% end %>
           <% end %>
         </div>
         <div class='content'>
           <% query.pages.each do |page| %>
           <span class='page_info sec_after'>
+            <%= fa_icon 'clock-o' %>
             <%= "#{(page.created_at - query.created_at).round(1)} sec" %>
           </span>
           <span class='page_info rank'>
-            <%= "rank: #{(page.start.to_i + page.rank)}" %>
+            <%= fa_icon 'trophy' %>
+            <%= "#{(page.start.to_i + page.rank)}" %>
           </span>
           <%= link_to page.title, page.url %> <br>
           <% end %>
