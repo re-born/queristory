@@ -8,7 +8,7 @@
     "scripts": ["jquery.js", "functions.js", "background.js"]
   },
   "content_scripts": [{
-    "matches": ["http://*/*", "https://*/*"],
+    "matches": ["http://www.google.co.jp/*", "https://www.google.co.jp/*", "http://www.google.com/*", "https://www.google.com/*"],
     "css": ["main.css"],
     "js": ["jquery.js", "content_script.js"]
   }],

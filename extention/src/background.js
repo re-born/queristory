@@ -1,12 +1,9 @@
-const SESSION_INTERVAL = 1800000
+const SESSION_INTERVAL = 600000
 var last_query = ''
 var latest_session_date = new Date()
 var session_id = generate_session_id()
 
-function post_query(query) {
-  if (new Date() - latest_session_date > SESSION_INTERVAL) {
-    session_id = generate_session_id()
-  }
+function post_query(query, session_id) {
   query = query + '&session_id=' + session_id
   if(query != last_query){
     $.ajax({
@@ -16,7 +13,14 @@ function post_query(query) {
     })
   }
   last_query = query
+}
+
+function check_session_id() {
+  if (new Date() - latest_session_date > SESSION_INTERVAL) {
+    session_id = generate_session_id()
+  }
   latest_session_date = new Date()
+  return session_id
 }
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
@@ -29,10 +33,19 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
     if (hostname_condition && pathname_condition){
       if (parsed_url.hash == '') {
-        post_query(parsed_url.search.slice(1))
+        post_query(parsed_url.search.slice(1), check_session_id())
       } else {
-        post_query(parsed_url.hash.slice(1))
+        post_query(parsed_url.hash.slice(1), check_session_id())
       }
     }
   }
 })
+
+chrome.extension.onRequest.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == 'get_session_id')
+      sendResponse({session_id: session_id})
+    else
+      sendResponse({}) // snub them.
+  }
+)

@@ -1,6 +1,8 @@
 ShameHistory::Application.routes.draw do
-  #resources :queries
+  resources :queries
   post 'query/create' => 'queries#create'
+  post 'page/create' => 'pages#create'
+  root 'queries#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

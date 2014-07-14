@@ -1,9 +1,13 @@
 class QueriesController < ApplicationController
+  def index
+    @queries = Query.all.page(params[:page]).per(25)
+  end
+
   def create
     @query = Query.new(query_params)
       if @query.save
         render nothing: true
-        tweet(params['q'])
+        tweet(@query.q)
       else
       end
   end

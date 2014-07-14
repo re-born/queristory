@@ -1,31 +1,46 @@
-<h1>Listing queries</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Query</th>
-      <th>User</th>
-      <th>Deleted at</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @queries.each do |query| %>
-      <tr>
-        <td><%= query.query %></td>
-        <td><%= query.user_id %></td>
-        <td><%= query.deleted_at %></td>
-        <td><%= link_to 'Show', query %></td>
-        <td><%= link_to 'Edit', edit_query_path(query) %></td>
-        <td><%= link_to 'Destroy', query, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class='contents'>
+  <a href='/'><h1>Queristory</h1></a>
+  <% @queries.each do |query| %>
+    <% cache([query]) do %>
+      <div class='row query' id='item_<%= query.id %>'>
+        <div class='columns column_date'>
+          <p class='date'> <%= query.created_at.strftime('%Y/%m/%d') %> </p>
+          <p class='time'> <%= query.created_at.strftime('%H:%M') %> </p>
+        </div>
+        <div class='columns column_left'>
+          <p class='user_icon'><%= image_tag 'queristory.png' %></p>
+        </div>
+        <div class='columns column_right'>
+          <h3 class='title'><span class='truncate'>
+            <%= link_to query.q.truncate(80), "http://google.com/search?q=#{query.q}" , title: query.q %>
+          </span></h3>
+          <div class='options'>
+            <% ['tbm', 'as_qdr', 'lr', 'tbs', 'source'].each do |option| %>
+              <% if query[option].present? %>
+                <%= link_to "http://google.com/search?q=#{query.q}&#{option}=#{query[option]}" do %>
+                  <span class='label <%= option %>'>
+                    <%= "#{option}: #{query[option]}".truncate(25) %>
+                  </span>
+              <% end %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class='content'>
+            <% query.pages.each do |page| %>
+            <span class='page_info sec_after'>
+              <%= fa_icon 'clock-o' %>
+              <%= "#{(page.created_at - query.created_at).round(1)} sec" %>
+            </span>
+            <span class='page_info rank'>
+              <%= fa_icon 'trophy' %>
+              <%= "#{(page.start.to_i + page.rank)}" %>
+            </span>
+            <%= link_to page.title, page.url %> <br>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Query', new_query_path %>
+  <% end %>
+<%= paginate @queries %>
+</div>
