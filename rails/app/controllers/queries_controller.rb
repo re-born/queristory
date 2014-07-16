@@ -1,5 +1,6 @@
 class QueriesController < ApplicationController
   def index
+    Rails.logger.level = Logger::ERROR
     @queries = Query.all.page(params[:page]).per(25)
   end
 
