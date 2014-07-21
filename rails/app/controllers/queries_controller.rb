@@ -1,7 +1,11 @@
 class QueriesController < ApplicationController
   def index
     Rails.logger.level = Logger::ERROR
-    @queries = Query.all.group(:q, :tbm).page(params[:page]).per(25)
+    queries_with_pages = Query.joins(:pages)
+    grouped_queries = Query.group(:q, :tbm)
+    queries = (queries_with_pages + grouped_queries).uniq
+              .sort{ |a,b| b.created_at <=> a.created_at }
+    @queries = Kaminari.paginate_array(queries).page(params[:page]).per(25)
   end
 
   def create
