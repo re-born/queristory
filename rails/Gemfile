@@ -15,6 +15,7 @@ gem 'kaminari'
 gem 'sass-rails'
 gem 'compass-rails'
 gem 'font-awesome-rails'
+gem 'bitly'
 
 group :development do
   gem 'better_errors'
