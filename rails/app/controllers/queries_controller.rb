@@ -18,7 +18,7 @@ class QueriesController < ApplicationController
   private
 
     def query_params
-      params.permit(:q, :oq, :tbm, :as_qdr, :lr, :tbs, :source, :safe, :num, :filter, :pws, :session_id)
+      params.permit(:q, :oq, :tbm, :as_qdr, :lr, :tbs, :source, :safe, :num, :filter, :pws, :session_id, :queristory_form)
     end
 
     def tweet(tweet_content)

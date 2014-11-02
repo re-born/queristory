@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630073513) do
+ActiveRecord::Schema.define(version: 20141102083718) do
 
   create_table "pages", force: true do |t|
     t.integer  "query_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140630073513) do
     t.integer  "filter"
     t.integer  "pws"
     t.string   "session_id"
+    t.integer  "queristory_form"
   end
 
 end
