@@ -8,7 +8,9 @@ class QueriesController < ApplicationController
     @query = Query.new(query_params)
       if @query.save
         render nothing: true
-        tweet(@query.q)
+        bitly = Bitly.new(ENV['bitly_legacy_login'], ENV['bitly_legacy_api_key'])
+        url = "http://google.co.jp/search?q=#{@query.q}&queristory_form=#{@query.id}"
+        tweet "#{@query.q.truncate(110)} #{bitly.shorten(url).short_url}"
       else
       end
   end
