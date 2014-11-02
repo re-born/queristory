@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20141102083718) do
     t.integer  "filter"
     t.integer  "pws"
     t.string   "session_id"
-    t.integer  "queristory_form"
+    t.integer  "queristory_from"
   end
 
 end
