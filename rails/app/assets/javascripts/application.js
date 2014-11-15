@@ -19,5 +19,6 @@ $(document).ready(function() {
     navSelector: "nav.pagination",
     nextSelector: "nav.pagination a[rel=next]",
     itemSelector: ".query",
+    bufferPx: 1500,
   })
 })
