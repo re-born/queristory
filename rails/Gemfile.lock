@@ -114,6 +114,9 @@ GEM
       pry-remote (>= 0.1.7)
       pry-stack_explorer (~> 0.4.9)
       railties (>= 3.0, < 5.0)
+    jquery-rails (3.1.2)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.0.0)
     kaminari (0.16.1)
@@ -250,6 +253,7 @@ DEPENDENCIES
   font-awesome-rails
   grape
   jazz_hands
+  jquery-rails
   kaminari
   railroady
   rails (= 4.1.1)
