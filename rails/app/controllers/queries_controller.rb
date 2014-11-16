@@ -8,17 +8,11 @@ class QueriesController < ApplicationController
   def create
     @query = Query.new(query_params)
       if @query.save
-        bitly = Bitly.new(ENV['bitly_legacy_login'], ENV['bitly_legacy_api_key'])
-        url = "http://google.co.jp/search?q=#{@query.q}&queristory_from=#{@query.id}"
-        url += '&tbm=isch' if @query.search_image?
-        tweet_content = "#{@query.q.truncate(100)} #{bitly.shorten(url).short_url}"
-        tweet_content += ' [画像検索]' if @query.search_image?
-        tweet tweet_content
-
-        # for using websocket
         html = ( render partial: 'queries/query', locals: {query: @query} ).first
         WebsocketRails[:streaming].trigger 'create', html
         head :ok
+
+        tweet format_for_tweet(@query)
       else
       end
   end
@@ -27,6 +21,15 @@ class QueriesController < ApplicationController
 
     def query_params
       params.permit(:q, :oq, :tbm, :as_qdr, :lr, :tbs, :source, :safe, :num, :filter, :pws, :session_id, :queristory_from)
+    end
+
+    def format_for_tweet(query)
+      bitly = Bitly.new(ENV['bitly_legacy_login'], ENV['bitly_legacy_api_key'])
+      url = "http://google.co.jp/search?q=#{query.q}&queristory_from=#{query.id}"
+      url += '&tbm=isch' if query.search_image?
+      tweet_content = "#{query.q.truncate(100)} #{bitly.shorten(url).short_url}"
+      tweet_content += ' [画像検索]' if query.search_image?
+      tweet_content
     end
 
     def tweet(tweet_content)
