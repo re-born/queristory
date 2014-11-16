@@ -28,4 +28,7 @@ ShameHistory::Application.configure do
   config.assets.debug = true
 
   config.action_controller.perform_caching = true
+
+  # for using websocket-rails
+  config.middleware.delete Rack::Lock
 end

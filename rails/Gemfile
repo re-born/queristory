@@ -17,6 +17,8 @@ gem 'compass-rails'
 gem 'font-awesome-rails'
 gem 'bitly'
 gem 'jquery-rails'
+gem 'coffee-rails'
+gem 'websocket-rails'
 
 group :development do
   gem 'better_errors'

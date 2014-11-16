@@ -8,13 +8,17 @@ class QueriesController < ApplicationController
   def create
     @query = Query.new(query_params)
       if @query.save
-        render nothing: true
         bitly = Bitly.new(ENV['bitly_legacy_login'], ENV['bitly_legacy_api_key'])
         url = "http://google.co.jp/search?q=#{@query.q}&queristory_from=#{@query.id}"
         url += '&tbm=isch' if @query.search_image?
         tweet_content = "#{@query.q.truncate(100)} #{bitly.shorten(url).short_url}"
         tweet_content += ' [画像検索]' if @query.search_image?
         tweet tweet_content
+
+        # for using websocket
+        html = ( render partial: 'queries/query', locals: {query: @query} ).first
+        WebsocketRails[:streaming].trigger 'create', html
+        head :ok
       else
       end
   end
