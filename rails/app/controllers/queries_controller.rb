@@ -6,14 +6,20 @@ class QueriesController < ApplicationController
   end
 
   def create
+    latest_query = Query.first
     @query = Query.new(query_params)
       if @query.save
-        html = ( render partial: 'queries/query', locals: {query: @query} ).first
-        WebsocketRails[:streaming].trigger 'create', html
-        head :ok
+        unless latest_query.q == @query.q && latest_query.tbm == @query.tbm
+          html = ( render partial: 'queries/query', locals: {query: @query} ).first
+          WebsocketRails[:streaming].trigger 'create', html
+          head :ok
 
-        tweet format_for_tweet(@query)
+          tweet format_for_tweet(@query)
+        else
+          render nothing: true
+        end
       else
+        render nothing: true
       end
   end
 
