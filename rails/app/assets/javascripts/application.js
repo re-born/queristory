@@ -15,7 +15,7 @@
 //= require jquery.infinitescroll
 
 $(document).ready(function() {
-  $('.contents').infinitescroll({
+  $('.queries').infinitescroll({
     navSelector: "nav.pagination",
     nextSelector: "nav.pagination a[rel=next]",
     itemSelector: ".query",
