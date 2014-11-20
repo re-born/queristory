@@ -9,16 +9,16 @@
     </div>
     <div class='columns column_right'>
       <h3 class='title'><span class='truncate'>
-        <%= link_to query.q.truncate(80), "http://google.com/search?q=#{query.q}" , title: query.q %>
+        <%= link_to query.q.truncate(80), url_for_search(query, nil) %>
       </span></h3>
       <div class='options'>
-        <% ['tbm', 'as_qdr', 'lr', 'tbs', 'source'].each do |option| %>
+        <% ['tbm', 'as_qdr', 'lr', 'tbs', 'source', 'queristory_from'].each do |option| %>
           <% if query[option].present? %>
-            <%= link_to "http://google.com/search?q=#{query.q}&#{option}=#{query[option]}" do %>
-              <span class='label <%= option %>'>
+            <%= link_to url_for_search(query, option), class: option do %>
+              <span class='label'>
                 <%= "#{option}: #{query[option]}".truncate(25) %>
               </span>
-          <% end %>
+            <% end %>
           <% end %>
         <% end %>
       </div>

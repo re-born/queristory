@@ -137,25 +137,34 @@ body {
             font-weight: 100;
             font-family: 'Helvetica', Helvetica, Arial, sans-serif;
             @include little_transition;
-            &.tbm {
+          }
+          a {
+            &.tbm .label {
               border:1px solid #1abc9c; color: #1abc9c;
               &:hover { background:#1abc9c; color: #fff; }
             }
-            &.as_qdr {
+            &.as_qdr .label {
               border:1px solid #DA0; color: #DA0;
               &:hover { background:#F1BA00; color: #fff; }
             }
-            &.lr {
+            &.lr .label {
               border:1px solid #e67e22; color: #e67e22;
               &:hover { background:#e67e22; color: #fff; }
             }
-            &.tbs {
+            &.tbs .label {
               border:1px solid #e74c3c; color: #e74c3c;
               &:hover { background:#e74c3c; color: #fff; }
             }
-            &.source {
+            &.source .label {
               border:1px solid #9b59b6; color: #9b59b6;
               &:hover { background:#9b59b6; color: #fff; }
+            }
+            &.queristory_from {
+              pointer-events: none;
+              .label {
+                border:1px solid #666; color: #666;
+                &:hover { background:#666; color: #fff; }
+              }
             }
           }
         }
