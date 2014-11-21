@@ -1,4 +1,4 @@
-ShameHistory::Application.routes.draw do
+Queristory::Application.routes.draw do
   resources :queries
   post 'query/create' => 'queries#create'
   post 'page/create' => 'pages#create'

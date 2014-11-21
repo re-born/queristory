@@ -7,7 +7,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 ENV.update YAML.load_file('config/settings.yml')[Rails.env] rescue {}
 
-module ShameHistory
+module Queristory
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

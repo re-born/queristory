@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-ShameHistory::Application.config.secret_key_base = 'c7961eb289a35d41f8cfddd3720ec907c9d4edf0a3758b964dc46a54dcf49b346f871d39762206b15a8a1e266104658242a54d6699147de326bf7ac238c22583'
+Queristory::Application.config.secret_key_base = 'c7961eb289a35d41f8cfddd3720ec907c9d4edf0a3758b964dc46a54dcf49b346f871d39762206b15a8a1e266104658242a54d6699147de326bf7ac238c22583'
