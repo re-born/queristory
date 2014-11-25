@@ -7,6 +7,7 @@
   "background": {
     "scripts": ["jquery.js", "functions.js", "background.js"]
   },
+  "options_page": "options.html",
   "content_scripts": [{
     "matches": ["http://www.google.co.jp/*", "https://www.google.co.jp/*", "http://www.google.com/*", "https://www.google.com/*"],
     "css": ["main.css"],

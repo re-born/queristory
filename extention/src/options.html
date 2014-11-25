@@ -2,15 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>test app</title>
+  <title>options for Queristory</title>
   <script src="jquery.js"></script>
-  <script src="oauth.js"></script>
-  <script src="background.js"></script>
 </head>
 <body>
-  <h3>input your last name</h3>
-  <input type="text" id='last_name'>
-  <button type="button" id='save'>save!</button>
+  <h3>input your team info</h3>
+  <form id='get_teams_list'>
+    url for getting teams list: <input type="text" id='teams_list_source' >
+    <button type="submit" id='get_teams_list_button'>reload teams</button>
+  </form>
+  <hr>
+  <form id='team_info'>
+    select your team: <select id='teams_list'></select>
+    <br>
+    password for your team: <input type="password" id='team_password'><br>
+    <button type="submit" id='save'>save!!</button>
+  </form>
+  <div id='auth_success'></div>
   <script src="options.js"></script>
 </body>
 </html>
