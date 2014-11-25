@@ -1,0 +1,13 @@
+<div class='contents'>
+  <a href='/'><h1><%= @team.name %></h1></a>
+  <% last_query_str = nil %>
+  <div class='queries'>
+    <% @queries.each do |query| %>
+      <% unless last_query_str == query.q %>
+        <%= render partial: 'queries/query', locals: {query: query} %>
+      <% end %>
+      <% last_query_str = query.q %>
+    <% end %>
+  <%= paginate @queries %>
+  </div>
+</div>
