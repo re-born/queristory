@@ -1,5 +1,5 @@
 Queristory::Application.routes.draw do
-  resources :teams, only: [:show]
+  resources :teams, only: [:index, :show]
   resources :queries
   post 'query/create' => 'queries#create'
   post 'page/create' => 'pages#create'
