@@ -5,6 +5,8 @@ var session_id = generate_session_id()
 
 function post_query(query, session_id) {
   query = query + '&session_id=' + session_id
+  query = query + '&team_name=' + 'sakai_lab'
+  query = query + '&team_password=' + 'pass_hoge'
   if(query != last_query){
     $.ajax({
       url: 'http://0.0.0.0:1984/query/create',

@@ -6,8 +6,10 @@ class QueriesController < ApplicationController
   end
 
   def create
-    latest_query = Query.first
-    @query = Query.new(query_params)
+    team = Team.find_by(name: team_params[:team_name])
+    if team && team.authenticate(team_params[:team_password])
+      @query = Query.new(query_with_team_id(team))
+      latest_query = Query.first
       if @query.save
         unless latest_query.q == @query.q && latest_query.tbm == @query.tbm
           html = ( render partial: 'queries/query', locals: {query: @query} ).first
@@ -21,12 +23,23 @@ class QueriesController < ApplicationController
       else
         render nothing: true
       end
+    end
   end
 
   private
 
     def query_params
       params.permit(:q, :oq, :tbm, :as_qdr, :lr, :tbs, :source, :safe, :num, :filter, :pws, :session_id, :queristory_from)
+    end
+
+    def team_params
+      params.permit(:team_name, :team_password)
+    end
+
+    def query_with_team_id(team)
+      query_hash = query_params.dup
+      query_hash[:team_id] = team.id
+      query_hash
     end
 
     def format_for_tweet(query)

@@ -34,6 +34,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    bcrypt (3.1.9)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -278,6 +279,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  bcrypt
   better_errors
   binding_of_caller
   bitly
