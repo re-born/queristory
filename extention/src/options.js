@@ -41,14 +41,13 @@ function reload_teams_list() {
       $('#teams_list').append($('<option>').html(team_name).val(team_name));
     })
 
-    // focus the team which has already selected
+    // focus the team which has already registerd
     chrome.storage.sync.get('team_info', function(item) {
       $('#teams_list').val(item.team_info.team_name)
+      if ( $('#team_password').val() != '' ) {
+        check_auth() // passが入力されているときに認証確認
+      }
     })
-
-    if ( $('#team_password').val() != '' ) {
-      check_auth() // passが入力されているときに認証確認
-    }
   })
 }
 
