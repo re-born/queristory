@@ -52,11 +52,14 @@ function get_teams_list() {
     chrome.storage.sync.get('team_info', function(item) {
       $('#teams_list').val(item.team_info.team_name)
     })
-  });
+    if ( $('#team_password').val() != '' ) {
+      check_auth() // passが入力されているときに認証確認
+    }
+  })
 }
 
 function check_auth() {
-  var json = {
+  var team_info_for_auth = {
     team_name: $('#teams_list').val(),
     team_password: $('#team_password').val(),
   }
@@ -68,9 +71,11 @@ function check_auth() {
       'Content-Type': 'application/json'
     },
     dataType: 'json',
-    data: json,
+    data: team_info_for_auth,
   }).done(function(res) {
-    console.log(res)
-    $('#auth_success').text(res)
-  });
+    if (res)
+      $('#auth_success').text('Queristory is now active!!')
+    else
+      $('#auth_success').text('something went wrong...')
+  })
 }
