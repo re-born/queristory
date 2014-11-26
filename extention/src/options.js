@@ -63,5 +63,6 @@ function get_team_info_for_auth() {
   return {
     team_name: $('#teams_list').val(),
     team_password: $('#team_password').val(),
+    host_url: $('#teams_list_source').val(),
   }
 }

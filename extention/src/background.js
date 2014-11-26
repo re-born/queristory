@@ -6,7 +6,7 @@ var session_id = generate_session_id()
 function post_query(query, session_id, auth_info) {
   if(query != last_query){
     $.ajax({
-      url: 'http://0.0.0.0:1984/query/create',
+      url: auth_info.host_url + '/query/create',
       type: 'post',
       data: format_query(query, session_id, auth_info),
     })
@@ -48,8 +48,8 @@ chrome.extension.onRequest.addListener(
 function post_query_with_auth(parsed_url) {
   chrome.storage.sync.get('team_info', function(item) {
     var auth_info = { team_name: item.team_info.team_name,
-                  team_password: item.team_info.team_password }
-
+                  team_password: item.team_info.team_password,
+                       host_url: item.team_info.host_url, }
     var query = parsed_url.hash == '' ? parsed_url.search.slice(1)
                                       : parsed_url.hash.slice(1)
     post_query(query, check_session_id(), auth_info)
