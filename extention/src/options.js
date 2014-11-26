@@ -43,9 +43,14 @@ function reload_teams_list() {
 
     // focus the team which has already registerd
     chrome.storage.sync.get('team_info', function(item) {
-      $('#teams_list').val(item.team_info.team_name)
-      if ( $('#team_password').val() != '' ) {
-        check_auth() // passが入力されているときに認証確認
+      if(item.team_info.team_name == null) {
+        var team = $('#teams_list > option').first().val()
+        $('#teams_list').val(team) // 最初のやつを選択
+      } else {
+        $('#teams_list').val(item.team_info.team_name)
+        if ( $('#team_password').val() != '' ) {
+          check_auth() // passが入力されているときに認証確認
+        }
       }
     })
   })
@@ -54,8 +59,9 @@ function reload_teams_list() {
 function check_auth() {
   var auth_url = $('#teams_list_source').val() + '/auth'
   $.getJSON( auth_url, get_team_info_for_auth(), function(res) {
-    var message = res ? 'Queristory is now active!' : 'failed';
-    $('#auth_success').text(message)
+    var message = res ? 'Queristory is now active!'
+                      : 'Authentification has FAILED';
+    toast(message, 3000)
   })
 }
 
