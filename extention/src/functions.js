@@ -15,3 +15,10 @@ function parseUrl( url ) {
     a.href = url;
     return a;
 }
+
+function format_query(query, session_id, auth_info) {
+  query += '&session_id=' + session_id
+  query += '&team_name=' + auth_info.team_name
+  query += '&team_password=' + auth_info.team_password
+  return query
+}

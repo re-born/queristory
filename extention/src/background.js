@@ -4,14 +4,11 @@ var latest_session_date = new Date()
 var session_id = generate_session_id()
 
 function post_query(query, session_id, auth_info) {
-  query = query + '&session_id=' + session_id
-  query = query + '&team_name=' + auth_info.team_name
-  query = query + '&team_password=' + auth_info.team_password
   if(query != last_query){
     $.ajax({
       url: 'http://0.0.0.0:1984/query/create',
       type: 'post',
-      data: query, // => 'q=hoge&safe=off&...&session_id=30e108d2...'
+      data: format_query(query, session_id, auth_info),
     })
   }
   last_query = query
