@@ -9,8 +9,12 @@ class PagesController < ApplicationController
         session_id: @page.session_id,
       }).id
       @page.update({query_id: query_id})
+
       if @page.save
-        render nothing: true
+        html = ( render partial: 'pages/page', locals: {page: @page} ).first
+
+        WebsocketRails[team.name.to_sym].trigger 'page', { html: html, query_id: query_id}
+        head :ok
       end
     end
   end

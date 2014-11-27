@@ -13,7 +13,7 @@ class QueriesController < ApplicationController
       if @query.save
         unless latest_query.q == @query.q && latest_query.tbm == @query.tbm
           html = ( render partial: 'queries/query', locals: {query: @query} ).first
-          WebsocketRails[team.name.to_sym].trigger 'create', html
+          WebsocketRails[team.name.to_sym].trigger 'query', html
           head :ok
 
           if team.twitter_enabled?
