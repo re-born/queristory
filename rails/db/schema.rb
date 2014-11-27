@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141102083718) do
+ActiveRecord::Schema.define(version: 20141125033629) do
 
   create_table "pages", force: true do |t|
     t.integer  "query_id"
@@ -42,6 +42,19 @@ ActiveRecord::Schema.define(version: 20141102083718) do
     t.integer  "pws"
     t.string   "session_id"
     t.integer  "queristory_from"
+    t.integer  "team_id"
+  end
+
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.integer  "the_number_of_people"
+    t.string   "password_digest"
+    t.string   "twitter_consumer_key"
+    t.string   "twitter_consumer_secret"
+    t.string   "twitter_oauth_key"
+    t.string   "twitter_oauth_secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

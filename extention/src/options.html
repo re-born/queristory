@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>test app</title>
-  <script src="jquery.js"></script>
-  <script src="oauth.js"></script>
-  <script src="background.js"></script>
+
+  <meta charset='utf-8'>
+  <title>options for Queristory</title>
+  <script src='./jquery.js'></script>
+  <link rel='stylesheet' type='text/css' href='./css/materialize.min.css'  />
+  <link rel='stylesheet' type='text/css' href='./css/options.css' />
+
 </head>
 <body>
-  <h3>input your last name</h3>
-  <input type="text" id='last_name'>
-  <button type="button" id='save'>save!</button>
-  <script src="options.js"></script>
+  <div class='container'>
+    <script src='./js/materialize.min.js'></script>
+
+    <h1>input your team info</h1>
+    <form id='get_teams_list'>
+      <h4>URL for getting teams list:</h4><br>
+      <input type='text' id='teams_list_source' >
+      <button type='submit' id='get_teams_list_button' class='btn'>reload teams</button>
+    </form>
+    <form id='register_team_info'>
+      <h4>select your team:</h4> <select id='teams_list'></select>
+      <br>
+      <h4>password for your team:</h4> <input type='password' id='team_password'><br>
+      <button type='submit' id='save' class='btn'>save!!</button>
+    </form>
+  </div>
+  <script src='options.js'></script>
 </body>
 </html>

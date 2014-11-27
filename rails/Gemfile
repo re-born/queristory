@@ -19,6 +19,7 @@ gem 'bitly'
 gem 'jquery-rails'
 gem 'coffee-rails'
 gem 'websocket-rails'
+gem 'bcrypt'
 
 group :development do
   gem 'better_errors'

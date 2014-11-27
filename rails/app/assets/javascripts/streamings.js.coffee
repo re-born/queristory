@@ -1,6 +1,8 @@
 #= require websocket_rails/main
 
-dispatcher = new WebSocketRails('0.0.0.0:1984/websocket')
-channel = dispatcher.subscribe('streaming')
+team_name = location.pathname.match(/([^\/]*)\/*$/)[1]
+
+dispatcher = new WebSocketRails("#{location.host}/websocket")
+channel = dispatcher.subscribe(team_name)
 channel.bind 'create', (html) ->
   $(html).prependTo('.queries').hide().fadeIn()
