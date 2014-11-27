@@ -16,9 +16,14 @@ function parseUrl( url ) {
     return a;
 }
 
-function format_query(query, session_id, auth_info) {
-  query += '&session_id=' + session_id
-  query += '&team_name=' + auth_info.team_name
-  query += '&team_password=' + auth_info.team_password
-  return query
+function format(query_or_page, session_id, auth_info) {
+  query_or_page += '&session_id=' + session_id
+  query_or_page += '&team_name=' + auth_info.team_name
+  query_or_page += '&team_password=' + auth_info.team_password
+  return query_or_page
+}
+
+function extract_query_from(url) {
+  return url.hash == '' ? url.search.slice(1)
+                        : url.hash.slice(1)
 }

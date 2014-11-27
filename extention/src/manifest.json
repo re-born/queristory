@@ -11,7 +11,7 @@
   "content_scripts": [{
     "matches": ["http://www.google.co.jp/*", "https://www.google.co.jp/*", "http://www.google.com/*", "https://www.google.com/*"],
     "css": ["main.css"],
-    "js": ["jquery.js", "content_script.js"]
+    "js": ["jquery.js", "functions.js", "content_script.js"]
   }],
   "page_action": {
     "default_icon": "icon128.png",

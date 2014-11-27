@@ -1,0 +1,11 @@
+<% cache(page) do %>
+  <span class='page_info sec_after'>
+    <%= fa_icon 'clock-o' %>
+    <%= "#{(page.created_at - page.query.created_at).round(1)} sec" %>
+  </span>
+  <span class='page_info rank'>
+    <%= fa_icon 'trophy' %>
+    <%= "#{(page.start.to_i + page.rank)}" %>
+  </span>
+  <%= link_to page.title, page.url %> <br>
+<% end %>
