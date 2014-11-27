@@ -5,13 +5,21 @@ var session_id = generate_session_id()
 
 function post_query(query, session_id, auth_info) {
   if(query != last_query){
-    $.ajax({
-      url: auth_info.host_url + '/query/create',
-      type: 'post',
-      data: format_query(query, session_id, auth_info),
-    })
+    post_with_ajax(query, session_id, auth_info, 'query')
   }
   last_query = query
+}
+
+function post_page(page, session_id, auth_info) {
+  post_with_ajax(page, session_id, auth_info, 'page')
+}
+
+function post_with_ajax(data, session_id, auth_info, query_or_page) {
+  $.ajax({
+    url: auth_info.host_url + '/' + query_or_page + '/create',
+    type: 'post',
+    data: format(data, session_id, auth_info),
+  })
 }
 
 function check_session_id() {
@@ -31,27 +39,35 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
                       || parsed_url.pathname == '/webhp'
 
     if (hostname_condition && pathname_condition){
-      post_query_with_auth(parsed_url)
+      var query = extract_query_from(parsed_url)
+      post_query_with_auth(query)
     }
   }
 })
 
 chrome.extension.onRequest.addListener(
   function(request, sender, sendResponse) {
-    if (request.greeting == 'get_session_id')
-      sendResponse({session_id: session_id})
-    else
-      sendResponse({}) // snub them.
+    if (request.command == 'post_page') {
+      post_page_with_auth(request.data)
+    }
   }
 )
 
-function post_query_with_auth(parsed_url) {
+function post_query_with_auth(query_data) {
   chrome.storage.sync.get('team_info', function(item) {
-    var auth_info = { team_name: item.team_info.team_name,
-                  team_password: item.team_info.team_password,
-                       host_url: item.team_info.host_url, }
-    var query = parsed_url.hash == '' ? parsed_url.search.slice(1)
-                                      : parsed_url.hash.slice(1)
-    post_query(query, check_session_id(), auth_info)
+    post_query(query_data, check_session_id(), get_auth_info(item))
   })
 }
+
+function post_page_with_auth(page_data) {
+  chrome.storage.sync.get('team_info', function(item) {
+    post_page(page_data, check_session_id(), get_auth_info(item))
+  })
+}
+
+function get_auth_info(item) {
+  return { team_name: item.team_info.team_name,
+       team_password: item.team_info.team_password,
+            host_url: item.team_info.host_url }
+}
+
