@@ -16,3 +16,6 @@
 /rails/tmp
 
 /rails/config/settings.yml
+
+/extention/src.*
+
