@@ -19,6 +19,6 @@
 
 /rails/.rbenv-gemsets
 
-/extention/src.*
-/extention/*.crx
+/extension/src.*
+/extension/*.crx
 
