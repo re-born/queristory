@@ -16,3 +16,9 @@
 /rails/tmp
 
 /rails/config/settings.yml
+
+/rails/.rbenv-gemsets
+
+/extension/src.*
+/extension/*.crx
+
