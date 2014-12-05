@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
 
   def index
-    render json: Team.all.map(&:name)
+    render json: Team.pluck(:name)
   end
 
   def show

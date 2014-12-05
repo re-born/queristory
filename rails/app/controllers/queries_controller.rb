@@ -9,9 +9,8 @@ class QueriesController < ApplicationController
     team = Team.find_by(name: team_params[:team_name])
     if team && team.authenticate(team_params[:team_password])
       @query = Query.new(query_with_team_id(team))
-      latest_query = Query.first
       if @query.save
-        unless latest_query.q == @query.q && latest_query.tbm == @query.tbm
+        unless @query.identical_with?(Query.second)
           html = ( render partial: 'queries/query', locals: {query: @query} ).first
           WebsocketRails[team.name.to_sym].trigger 'query', html
           head :ok

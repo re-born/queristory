@@ -8,4 +8,10 @@ class Query < ActiveRecord::Base
   def search_image?
     self.tbm == 'isch'
   end
+
+  def identical_with?(query)
+    self.q == query.q &&
+    self.tbm == query.tbm &&
+    self.queristory_from == query.queristory_from
+  end
 end
