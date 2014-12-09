@@ -31,4 +31,7 @@ Queristory::Application.configure do
 
   # for using websocket-rails
   config.middleware.delete Rack::Lock
+
+  # log rotation
+  config.logger = Logger.new('log/production.log', 'weekly')
 end
