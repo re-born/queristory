@@ -20,7 +20,6 @@ gem 'jquery-rails'
 gem 'coffee-rails'
 gem 'websocket-rails'
 gem 'bcrypt'
-gem 'nokogiri'
 
 group :development do
   gem 'better_errors'
